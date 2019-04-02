@@ -1,0 +1,36 @@
+$(document).ready(
+    function()
+    {
+        //tutaj jest kawałek kodu w którym przypisane są zmienne do udostępniania danych
+var daneOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+var daneORTO = L.tileLayer.wms ("http://mapy.geoportal.gov.pl/wss/service/img/guest/ORTO/MapServer/WMSServer", {layer:"Raster", format:"image/png", transparent: 'true', version:'1.1.1'});
+        // tutaj jest obiekt przypisanie do zmiennej obiektu "L" i wywołanie metody .map ktora tworzy mapę o wybranych parametrach
+var mojamapa = L.map('mymap',{center:[52.1, 21.0], zoom: 10});
+
+        // wywołanie mapy i wprowadzenie do niej danych z OSM
+mojamapa.addLayer(daneOSM);
+        // obsługa różnych źródeł danych 
+var baseMaps = {
+    "OpenStreetMaps": daneOSM,
+    "Ortofotomapa": daneORTO
+};
+        // dodanie guzika do przełączania danych między różnymi źródłami
+L.control.layers(baseMaps).addTo(mojamapa);  
+        
+        //dodanie skali
+        L.control.scale({imperial: false}).addTo(mojamapa);
+        
+        //dodanie lokalizacji i obsługa lokalizacji
+        
+        mojamapa.locate({setView: true, maxZoom: 14});
+        // funkcja, która wyświetla ikony okręgu w miejscu gdzie się znajdujemy (współrzędne są przesyłane za pomocą zmiennej o nazwie event)
+        
+        function zlokalizowano(event){
+            var radius = event.accuracy/2;
+            //L.marker(event.latlng).addTo(mojamapa);
+            L.circle(event.latlng, radius).addTo(mojamapa);
+        };
+        
+        mojamapa.on('locationfound',zlokalizowano);
+    });
+

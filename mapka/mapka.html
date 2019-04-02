@@ -8,10 +8,18 @@
     <meta name="author" content="Aneta">
     
     <meta http-equiv="X-Ua-Compatible" content= "IE-edge,chrome=1">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     
-   
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  crossorigin=""></script>
+  
 </head>
 <body>
    <header>
@@ -22,29 +30,17 @@
        
        <nav>
            <ul class="menu">
-               <li> <a href="#"> Strona główna </a> </li>
+               <li> <a href="/index.html"> Strona główna </a> </li>
                <li> <a href="#">O projekcie </a> </li>
-               <li> <a href="mapka/mapka.html">Mapa </a> </li>
+               <li> <a href="#">Mapa </a> </li>
                <li> <a href="#">Kontakt </a> </li>
            </ul>
        </nav>
      
-         <header>
-              <h1> Witaj na stronie! </h1>
-              <p> Zapraszam do zapoznania się z treściami udostępnionymi na stronie! </p>
-          </header>
+     
             <!--tutaj jest blok z mapą i opisem i blok z opisem-->
-       <div class="categories">
-        
-          <div class="subject">
-            <figure> <a href="#"> <img src="img/mapa_morska.png" alt="mapa morska"> </a> </figure>
-            </div>
-             <div class="subject">
-            <figure> <a href="#"> <img src="img/mapa_morska.png" alt="mapa morska"> </a> </figure>
-            </div>
-           
-       </div>
-      
-       
+    <div id="mymap">  </div>
+    <script src="/lib/jquery-3.3.1.min.js"> </script><script src="mapka.js"> </script>
+    
 </body>
 </html>

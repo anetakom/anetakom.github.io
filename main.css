@@ -91,3 +91,10 @@ figure{
     justify-content: center;
     
 }
+
+#mymap{
+    height: 70vh;
+    background-color: gray;
+    
+        
+}
