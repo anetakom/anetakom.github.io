@@ -4,6 +4,22 @@ $(document).ready(
         //tutaj jest kawałek kodu w którym przypisane są zmienne do udostępniania danych
 var daneOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 var daneORTO = L.tileLayer.wms ("http://mapy.geoportal.gov.pl/wss/service/img/guest/ORTO/MapServer/WMSServer", {layer:"Raster", format:"image/png", transparent: 'true', version:'1.1.1'});
+        
+var danePanstwo = L.tileLayer.wms("http://localhost:8080/geoserver/projekt_KOM/wms", {layers:"projekt_KOM:panstwo_clip", format:'image/png', version:'1.1.1.'});
+var daneWojewodztwa = L.tileLayer.wms("http://localhost:8080/geoserver/projekt_KOM/wms", {layers:"projekt_KOM:wojewodztwa", format:'image/png', version:'1.1.1.'});
+
+                
+      // zmienna przechowująca stylizację danych pobieranych z pliku geojson
+        
+//var styl_wojewodztwa = {"color": "green"}
+        
+        // zmienna przechowująca obiekt biblioteki leaflet wywołujący na rzecz obiektu metodę geoJSON.ajax jako adrybuty dla metody podaję adres danych i nazwę zmiennej do stylizacji
+        
+//var wojewodztwa_qgis = new L.GeoJSON.AJAX("qgiswojewodztwa.geojson",{style: styl_wojewodztwa});
+        
+        // wywołanie metody addTo na rzecz obiektu województwa i dodanie danych do okna mojamapa
+        
+       // wojewodztwa_qgis.addTo(mojamapa);  
         // tutaj jest obiekt przypisanie do zmiennej obiektu "L" i wywołanie metody .map ktora tworzy mapę o wybranych parametrach
 var mojamapa = L.map('mymap',{center:[52.1, 21.0], zoom: 10});
 
@@ -12,10 +28,16 @@ mojamapa.addLayer(daneOSM);
         // obsługa różnych źródeł danych 
 var baseMaps = {
     "OpenStreetMaps": daneOSM,
-    "Ortofotomapa": daneORTO
+    "Ortofotomapa": daneORTO,
+   
 };
+var overlays = {
+    "GranicaPanstwo": danePanstwo,
+    "GranicaWojewodztwa": daneWojewodztwa,
+    //"GranicaWojewodztwa": wojewodztwa_qgis,
+        };
         // dodanie guzika do przełączania danych między różnymi źródłami
-L.control.layers(baseMaps).addTo(mojamapa);  
+L.control.layers(baseMaps, overlays).addTo(mojamapa);  
         
         //dodanie skali
         L.control.scale({imperial: false}).addTo(mojamapa);
@@ -32,5 +54,9 @@ L.control.layers(baseMaps).addTo(mojamapa);
         };
         
         mojamapa.on('locationfound',zlokalizowano);
+
+       
+        
+        
     });
 
